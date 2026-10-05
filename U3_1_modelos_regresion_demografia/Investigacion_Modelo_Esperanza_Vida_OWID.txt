@@ -1,0 +1,27 @@
+¿QUÉ MODELO USA OUR WORLD IN DATA PARA PROYECTAR LA ESPERANZA DE VIDA HASTA 2100?
+Investigación metodológica y comparación con modelos de regresión y redes neuronales
+
+1. ¿DE DÓNDE SALEN LOS DATOS Y QUÉ MODELO USAN?
+Our World in Data no crea sus propias proyecciones demográficas desde cero. Lo que hace es tomar las estimaciones oficiales de la División de Población de la ONU, publicadas en su informe World Population Prospects.
+
+El modelo matemático que usa la ONU para proyectar la esperanza de vida al nacer hasta el año 2100 es un Modelo Jerárquico Bayesiano (BHM) junto con funciones logísticas dobles y el método demográfico de componentes por cohortes. En la práctica, este método fue desarrollado por investigadores de la ONU y de la Universidad de Washington, y está disponible de forma abierta en el paquete bayesLife de R.
+
+2. ¿POR QUÉ USAN ESTE MODELO?
+La esperanza de vida no crece en línea recta ni de forma infinita. La ONU eligió este método por tres razones muy claras:
+
+- Aprende de todos los países: Al ser un modelo jerárquico, si un país tiene pocos datos históricos o registros incompletos, el modelo aprovecha la experiencia histórica de otros países similares para estimar su evolución.
+- Respeta límites biológicos: Pasar de 40 a 60 años de vida suele ser rápido gracias a vacunas, agua potable y reducción de mortalidad infantil. En cambio, pasar de 80 a 90 o 100 años requiere avances médicos mucho más complejos. La función logística modela esa desaceleración natural y evita proyectar edades biológicamente absurdas para el 2100.
+- Mide la incertidumbre real: En lugar de dar una sola cifra fija, el modelo corre miles de simulaciones estadísticas (Monte Carlo) para generar rangos de probabilidad. La línea que publica Our World in Data es la variante media, que corresponde a la mediana de todas esas trayectorias posibles.
+
+3. DIFERENCIAS CON LOS MODELOS QUE USAMOS EN CLASE
+En nuestras prácticas usamos modelos de regresión lineal y redes neuronales (MLPRegressor) que predicen la esperanza de vida a partir de variables del mismo año, como PIB, población o gasto en salud. Las principales diferencias son:
+
+- Dependencia de datos futuros: Para predecir el año 2080 con una red neuronal de clase, necesitaríamos conocer de antemano el PIB de 2080, lo que traslada el problema a adivinar la economía futura. El modelo de la ONU proyecta el envejecimiento poblacional en el tiempo sin depender de pronósticos económicos lejanos.
+- Curvatura contra líneas rectas: Una regresión lineal asume que la tendencia siempre avanza al mismo ritmo, lo que para 2100 daría cifras irreales como esperanzas de vida de 140 años. El modelo bayesiano ya incluye el freno natural del envejecimiento.
+- Probabilidad frente a valores puntuales: Nuestros modelos de clase entregan un único valor fijo. El método de la ONU entrega distribuciones que reflejan qué tan incierto es el futuro a largo plazo.
+
+4. FUENTES
+1. Our World in Data (2024). Life Expectancy. Topic reference and UN WPP projections. https://ourworldindata.org/life-expectancy
+2. United Nations Population Division (2024). World Population Prospects 2024: Methodology. https://population.un.org/wpp/
+3. Raftery, A. E., et al. (2013). Bayesian probabilistic projections of life expectancy for all countries. Demographic Research, 28, 737-770. https://doi.org/10.4054/DemRes.2013.28.27
+4. Ševčíková, H., Raftery, A. E., y Gerland, P. (2024). bayesLife: Bayesian Projection of Life Expectancy. R package. https://cran.r-project.org/package=bayesLife
