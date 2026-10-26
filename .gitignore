@@ -2,3 +2,4 @@
 **/.venv/
 **/.ipynb_checkpoints/
 **/__pycache__/
+P2_examen_bigdata/data/raw/nyc_taxi_examen.csv
